@@ -24,7 +24,7 @@
             </el-form-item>
 
             <el-form-item label="web负责人" prop="response">
-              <el-tag type="small" v-for="tag in props.row.response" :key="tag">{{tag}}</el-tag>
+              <el-tag type="small" v-for="tag in props.row.response" :key="tag">{{allMembers[tag]}}</el-tag>
             </el-form-item>
 
             <el-form-item label="PL/导师" prop="teacher">
@@ -51,7 +51,7 @@
 
       <el-table-column prop="process" label="项目阶段" sortable width="180"></el-table-column>
 
-      <el-table-column prop="response" label="web负责人" sortable></el-table-column>
+      <el-table-column prop="responses" label="web负责人" sortable></el-table-column>
 
       <el-table-column prop="status" label="项目状态"></el-table-column>
 
@@ -135,11 +135,11 @@ export default {
         for (var item of that.tableData) {
           item.status =  that.statusTrans[item.status];
           item.response = item.response.split(",");
-          
+          item.responses = [];
           item.process = that.process[item.process];
 
           for (i in item.response) {
-            item.response[i] = that.allMembers[item.response[i]] + " ";
+            item.responses[i] = that.allMembers[item.response[i]] + " ";
           }
           item.teacher = item.teacher.split(",");
 
@@ -155,7 +155,7 @@ export default {
     },
     showOptions: function(row){
       if(row.status == "待审核"){
-          if(!RegExp(this.name).test(row.response)){
+          if(!RegExp(this.name).test(row.responses)){
             return 1;
           }else{
             return 2;

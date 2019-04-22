@@ -105,7 +105,7 @@ export default {
         }],
         process: [{
           required: true,
-          message: '请输入评审意见',
+          message: '请选择阶段',
           trigger: 'blur'
         }],
         remarks: "",
