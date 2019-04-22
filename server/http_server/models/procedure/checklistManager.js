@@ -123,8 +123,8 @@ class ChecklistManager {
 
         return new Promise((resolve, reject) => {
             that.mailer.mailWithTemplate({
-                    to: ['yangchunmei'], //mailto
-                    copyTo: [''], //copyTo
+                    to: mail.mailto,//['yangchunmei'], //mailto
+                    copyTo:mail.copyTo,// [''], //copyTo
                     subject: `checklist表流程`,
                     attachments: [{
                         filename: `checklist${value.id}.xlsx`,

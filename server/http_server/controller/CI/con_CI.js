@@ -442,8 +442,8 @@ class CIControl {
 
         return new Promise((resolve, reject) => {
             that.mailer.mailWithTemplate({
-                    to: ['yangchunmei'], //mailto
-                    copyTo: [''], //copyTo
+                    to: mailto,//['yangchunmei'], //mailto
+                    copyTo:  copyto, //[''], //copyTo
                     subject: `checklist表流程`,
                     attachments: [{
                         filename: `checklist${value.id}.xlsx`,
