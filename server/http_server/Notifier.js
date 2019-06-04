@@ -2,7 +2,7 @@ const { ciConfig } = require("../config/basic_config");
 const productManager = require("./models/CI/productManager");
 const dbModel = require("../datebase_mysql/dbModel");
 const dbModal = require("../datebase_mysql/dbModel");
-const mailer = require("../mail_server/mail");
+const Mailer = require("../mail_server/mail");
 /**
  * Notify类
  * Notify用于在夜间唤醒product实例并进行检查
@@ -14,6 +14,8 @@ class Notifier {
         this.runningTimer = null;
         this.run = this.run.bind(this);
         this.notifyAllProduct = this.notifyAllProduct.bind(this);
+        this.mailer = new Mailer();
+        this.sendDailyReport  = this.sendDailyReport.bind(this);
     }
 
     run() {
@@ -54,7 +56,7 @@ class Notifier {
         productManager
             .doubleCheck()
             .then(productManager.runProductOnRunning)
-            .then(this.sendDailyReport)
+            //.then(this.sendDailyReport)
             .catch(err => {
                 if (err.errMessage == 'SVN服务器连接超时') {
                     if (this.svnCtTimes < 3) {
@@ -74,9 +76,9 @@ class Notifier {
             dbModel.tableModels.User
                 .findAll()
                 .then(users => {
-                    return mailer.mailWithTemplate({
+                    return this.mailer.mailWithTemplate({
                         to: users.map(usr => usr.mail),
-                        cc: [],
+                        copyTo: [],
                         subject: "CI 日报",
                         template: "dailyReport",
                         templateOptions: {}

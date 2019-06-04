@@ -4,7 +4,7 @@ const fs = require("fs");
 const serverIP = require("../../../config/basic_config").httpConfig.ip;
 const dbModel = require("../../../datebase_mysql/dbModel");
 
-class ErrorTemplate extends BaseTemplate {
+class DailyReportTemplate extends BaseTemplate {
     constructor() {
         super(...arguments);
         this.serverIP = serverIP;
@@ -268,7 +268,7 @@ class ErrorTemplate extends BaseTemplate {
 
 }
 
-let errorTemplate = new ErrorTemplate();
-errorTemplate.creatDailyReport();
+//let dailyReportTemplate = new DailyReportTemplate();
+//dailyReportTemplate.creatDailyReport();
 
-module.exports = new ErrorTemplate();
+module.exports = new DailyReportTemplate();
