@@ -1,316 +1,595 @@
 {
+    "status": "ok",
     "HandleLists": [
         {
-            "id": "1",
-            "name": "O1V1",
+            "id": 1,
+            "name": "O3V2.0",
+            "response": "yangchunmei",
+            "remarks": "pengjuadfdgfnli",
+            "teacher": "pengjuanli",
+            "mail": "yangchunmei",
             "process": "1",
-            "response": "yangchunmei,yanhuan",
-            "teacher":"yangchunmei,yanhuan",
-            "status": "resubmit",
-            "remarks": "",
-            "opinion":"",
-            "submit":"杨春梅",
-            "checklistData": [
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                }
-
-            ]
-        },
-        {
-            "id": "2",
-            "name": "O1V1",
-            "process": "1",
-            "response": "yanhuan",
-            "teacher":"pengjuanli",
             "status": "pending",
-            "remarks": "",
-            "opinion":"",
-            "submit":"杨春梅",
+            "opinion": null,
+            "submit": "杨春梅",
+            "createdAt": "2019-06-03T11:47:13.000Z",
+            "updatedAt": "2019-06-03T11:47:13.000Z",
+            "processnode": [
+                {
+                    "nodename": "修改",
+                    "time": "2019-06-03 11:50:40",
+                    "remarks": "",
+                    "operator": "aaa"
+                },
+                {
+                    "nodename": "添加",
+                    "time": "2019-06-03 11:50:40",
+                    "remarks": "",
+                    "operator": "aaa"
+                }
+            ],
             "checklistData": [
                 {
                     "ifchecked": "是",
                     "response": "ycm",
-                    "remarks": "3"
+                    "remarks": ""
                 },
                 {
                     "ifchecked": "是",
                     "response": "ycm",
-                    "remarks": "7"
+                    "remarks": "啦啦啦"
                 },
                 {
                     "ifchecked": "是",
                     "response": "ycm",
-                    "remarks": "5"
+                    "remarks": "啦啦啦"
                 },
                 {
                     "ifchecked": "是",
                     "response": "ycm",
-                    "remarks": "5"
+                    "remarks": "啦啦啦"
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 }
-
             ]
         },
         {
-            "id": "3",
-            "name": "O1V1",
+            "id": 5,
+            "name": "test",
+            "response": "yangchunmei",
+            "remarks": "eee",
+            "teacher": "pengjuanli",
+            "mail": "ee",
             "process": "1",
+            "status": "pending",
+            "opinion": "",
+            "submit": "杨春梅",
+            "createdAt": "2019-06-03T12:16:25.000Z",
+            "updatedAt": "2019-06-03T12:16:25.000Z",
+            "processnode": [
+                {
+                    "nodename": "新建流程",
+                    "time": "2019-06-03 11:50:40",
+                    "remarks": "eee",
+                    "operator": "杨春梅"
+                }
+            ],
+            "checklistData": [
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "O3V1.0",
             "response": "yangchunmei,yanhuan",
-            "teacher":"pengjuanli",
+            "remarks": "pengsdfsfjuanli",
+            "teacher": "pengjuanli",
+            "mail": "yangchunmei",
+            "process": "1",
             "status": "resubmit",
-            "remarks": "111111111111",
-            "opinion":"",
-            "submit":"",
+            "opinion": null,
+            "submit": "杨春梅",
+            "createdAt": "2019-06-03T11:47:13.000Z",
+            "updatedAt": "2019-06-03T11:47:13.000Z",
+            "processnode": [],
             "checklistData": [
                 {
                     "ifchecked": "是",
                     "response": "ycm",
-                    "remarks": "8"
+                    "remarks": "二退热贴"
                 },
                 {
                     "ifchecked": "是",
                     "response": "ycm",
-                    "remarks": "4"
+                    "remarks": "啦啦啦"
                 },
                 {
                     "ifchecked": "是",
                     "response": "ycm",
-                    "remarks": "5"
+                    "remarks": "啦啦啦"
                 },
                 {
                     "ifchecked": "是",
                     "response": "ycm",
-                    "remarks": "5"
+                    "remarks": "啦啦啦"
+                },
+                {
+                    "ifchecked": "否",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
                     "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 },
                 {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
-                },
-                {
-                    "ifchecked": "是",
-                    "response": "ycm",
-                    "remarks": "5"
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
                 }
-
+            ]
+        },
+        {
+            "id": 3,
+            "name": "test",
+            "response": "yangchunmei",
+            "remarks": "aaaaaaa",
+            "teacher": "pengjuanli",
+            "mail": "aaaa",
+            "process": "1",
+            "status": "pending",
+            "opinion": "",
+            "submit": "杨春梅",
+            "createdAt": "2019-06-03T12:06:20.000Z",
+            "updatedAt": "2019-06-03T12:06:20.000Z",
+            "processnode": [],
+            "checklistData": [
+                {
+                    "ifchecked": "是",
+                    "response": "ycm",
+                    "remarks": "二退热贴"
+                },
+                {
+                    "ifchecked": "是",
+                    "response": "ycm",
+                    "remarks": "啦啦啦"
+                },
+                {
+                    "ifchecked": "是",
+                    "response": "ycm",
+                    "remarks": "啦啦啦"
+                },
+                {
+                    "ifchecked": "是",
+                    "response": "ycm",
+                    "remarks": "啦啦啦"
+                },
+                {
+                    "ifchecked": "否",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "是",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "eeeee",
+            "response": "yangchunmei",
+            "remarks": "eeeeee",
+            "teacher": "pengjuanli",
+            "mail": "eeee",
+            "process": "1",
+            "status": "pending",
+            "opinion": "",
+            "submit": "杨春梅",
+            "createdAt": "2019-06-03T12:14:33.000Z",
+            "updatedAt": "2019-06-03T12:14:33.000Z",
+            "processnode": [],
+            "checklistData": [
+                {
+                    "ifchecked": "是",
+                    "response": "ycm",
+                    "remarks": "二退热贴"
+                },
+                {
+                    "ifchecked": "是",
+                    "response": "ycm",
+                    "remarks": "啦啦啦"
+                },
+                {
+                    "ifchecked": "是",
+                    "response": "ycm",
+                    "remarks": "啦啦啦"
+                },
+                {
+                    "ifchecked": "是",
+                    "response": "ycm",
+                    "remarks": "啦啦啦"
+                },
+                {
+                    "ifchecked": "否",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "是",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                },
+                {
+                    "ifchecked": "",
+                    "response": "",
+                    "remarks": ""
+                }
             ]
         }
-    ]
+    ],
+    "members": [
+        {
+            "mail": "CITest",
+            "name": "Admin"
+        },
+        {
+            "mail": "pengjuanli",
+            "name": "彭娟莉"
+        },
+        {
+            "mail": "xiechang",
+            "name": "谢昌"
+        },
+        {
+            "mail": "yangchunmei",
+            "name": "杨春梅"
+        },
+        {
+            "mail": "yanhuan",
+            "name": "闫欢"
+        },
+        {
+            "mail": "zhouan",
+            "name": "周安"
+        },
+        {
+            "mail": "zhuyi",
+            "name": "朱义"
+        },
+        {
+            "mail": "zoumengli",
+            "name": "邹梦丽"
+        }
+    ],
+    "name": "杨春梅"
 }

@@ -9,73 +9,83 @@ class ChecklistManager {
     /**
      * 添加新数据 
      */
-    insert(args){
-        var data = [];
-        if(args.procedure.response.indexOf(args.userMail) != '-1'){
-            args.procedure.submit = args.userName;
-        }
-        args.procedure.remarks = args.procedure.remarks + "    "+ "提交人：  " + args.userName+" 提交时间: "+ new Date().toLocaleString()+" ";
+    insert(data) {
 
-        // 判断负责人数
-        if (args.procedure.response.split(",").length > 1) {
-            args.procedure.status = "resubmit";
-        }
-
-        data[0] = args.procedure;
-        
         return new Promise((resolve, reject) => {
             dbModel.tableModels.Procedure.bulkCreate(data)
-                .then(resolve)
-                .catch(err => {
-                    console.info("插入数据库时出现错误");
-                    reject(err);
-                })
+            .then((value)=>{
+                resolve(value);
+            })
+            .then(resolve)
+            .catch(err => {
+                console.info("插入数据库时出现错误");
+                reject(err);
+            })
         })
     }
 
     /**
-     * 查询新插入的id
+     * 查询id的数据
      */
-    selectId(){
-
-    }
-
-    /**
-     * 更新数据
-     */
-    updateTable(updataObj,where){
+    selectId(id) {
 
         return new Promise((resolve, reject) => {
-            dbModel.tableModels.Procedure.update(updataObj, { where })
-            .then(value=>{
+            dbModel.tableModels.Procedure
+            .findOne({
+                where:{
+                    id: {
+                        "$eq": `${id}`
+                    }
+                }
+            })
+            .then(value => {
                 resolve(value);
             })
-            .catch(err =>{
+            .catch(err => {
+                console.log('插入出错了');
+                reject();
+            })
+        })
+    }
+
+    updateNodeTable(nodedata){
+        return new Promise((resolve, reject) => {
+            dbModel.tableModels.PorcessNode.bulkCreate(nodedata)
+            .then(value => {
+                resolve(value);
+            })
+            .catch(err => {
                 console.log('查询出错了');
                 reject();
             })
         })
+    }
+    /**
+     * 更新数据
+     */
+    updateTable(updataObj, where) {
 
-    }    
+        return new Promise((resolve, reject) => {
+            dbModel.tableModels.Procedure.update(updataObj, { where })
+                .then(value => {
+                    resolve(value);
+                })
+                .catch(err => {
+                    console.log('更新出错了');
+                    reject();
+                })
+        })
+
+    }
 
     /**
      * 根据 最新id  新建checklist表
      */
-    createChecklistTable(data){
-        var that = this;
+    createChecklistTable(data,values) {
 
         return new Promise((resolve, reject) => {
-            //检查
-            dbModel.tableModels.Procedure
-                .findAll({
-                    'order': [
-                        ['id', 'DESC']
-                    ]
-                })
-                .then(values => {
-                    return that._createExcel(data, values[0].dataValues);
-                })
-                .then(value=>{
+            this._createExcel(data, values[0].dataValues)
+                .then(value => {
                     resolve(value)
                 })
                 .catch(err => {
@@ -85,17 +95,17 @@ class ChecklistManager {
         });
     }
 
-     /**
+    /**
      * 保存 checklist 数据为xlsx表格
      * @param {xlsx数据} data 
      * @param {流程的id} id 
      */
     _createExcel(data, value) {
-        
+
         var exlBuf = fs.readFileSync("../resourcecs/checklist/checklist.xlsx");
         var path = "../resourcecs/checklist/checklist" + value.id + ".xlsx";
 
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             ejsExcel.renderExcelCb(exlBuf, data, function(err, exlBuf2) {
                 if (err) {
                     reject(err);
@@ -104,7 +114,6 @@ class ChecklistManager {
                 fs.writeFileSync(path, exlBuf2);
                 console.log("生成checklist" + value.id + ".xlsx");
                 resolve(value);
-                
             });
         });
     }
@@ -112,30 +121,50 @@ class ChecklistManager {
     /**
      * 发送邮件
      */
-    sendMail(value){
+    sendMail(value) {
         this.mailer = new Mailer();
         var that = this;
         var path = "../resourcecs/checklist/checklist" + value.id + ".xlsx";
-        var mail = that._judgeMail(value); 
-
+        var mail = that._judgeMail(value);
+        var response = [];
+        var users = [];
         console.log("邮件发送给" + mail.mailto);
         console.log("邮件抄送给" + mail.copyTo);
 
+        // debug 使用 邮件不发出去 只发给自己
+        mail.mailto = ['yangchunmei'];
+        mail.copyTo = [];
+
         return new Promise((resolve, reject) => {
-            that.mailer.mailWithTemplate({
-                    to: mail.mailto,//['yangchunmei'], //mailto
-                    copyTo:mail.copyTo,// [''], //copyTo
-                    subject: `checklist表流程`,
-                    attachments: [{
-                        filename: `checklist${value.id}.xlsx`,
-                        path: path
-                    }],
-                    template: "checklist",
-                    templateOptions: {
-                        msg: `${mail.msg}`,
-                        name: `${value.name}`,
-                        response: `${value.submit}`
-                    }
+
+            dbModel.tableModels.User
+                .findAll({ attributes: ["mail", "name"] })
+                .then(values => {
+                    // 负责人查询对应的姓名
+                    users = values.map(user =>{
+                        user = user.dataValues
+                        if(value.response.indexOf(user.mail) != -1){
+                            response.push(user.name);
+                        }
+                        return user;
+                    })
+                    response = response.join(',');    
+                    
+                   return that.mailer.mailWithTemplate({
+                        to: mail.mailto, //['yangchunmei'], //mailto
+                        copyTo: mail.copyTo, // [''], //copyTo
+                        subject: `checklist表流程`,
+                        attachments: [{
+                            filename: `checklist${value.id}.xlsx`,
+                            path: path
+                        }],
+                        template: "checklist",
+                        templateOptions: {
+                            msg: `${mail.msg}`,
+                            name: `${value.name}`,
+                            response: `${response}`
+                        }
+                    })
                 })
                 .then(() => {
                     resolve({
@@ -145,7 +174,7 @@ class ChecklistManager {
                 .catch(err => {
                     console.log(err);
                     reject({
-                        err: "1"
+                        err: "发送checklist邮件失败"
                     });
                 })
         });
@@ -157,32 +186,33 @@ class ChecklistManager {
      * 3. 审核驳回  提交人为空     发送给页面负责人 抄送给审核人
      * 4. 待提交  提交人不是全部提交  只发送给页面负责人  
      */
-    _judgeMail(value){
+    _judgeMail(value) {
         var mail = {};
         mail.mailto = [];
         mail.copyTo = [];
         mail.msg = "";
-         
-        if (value.status == "pending"){
-            mail.mailto = value.teacher;
-            mail.copyTo = value.response;
+
+
+        if (value.status == "pending") {
+            mail.mailto = value.teacher.split(',');
+            mail.copyTo = value.response.split(',');
             mail.msg = "该项目已提交checklist流程，请审核";
             return mail;
         }
-        if (value.status == "ending"){
-            mail.mailto = value.teacher;
+        if (value.status == "ending") {
+            mail.mailto = value.teacher.split(',');
             mail.mailto.push(value.mail);
-            mail.copyTo = value.response;
+            mail.copyTo = value.response.split(',');
             mail.msg = "项目的checklist如附件，请查收";
             return mail;
         }
-        if (value.status == "resubmit" && value.submit == ''){
-            mail.mailto = value.response;
-            mail.copyTo = value.teacher;
+        if (value.status == "resubmit" && value.submit == '') {
+            mail.mailto = value.response.split(',');
+            mail.copyTo = value.teacher.split(',');
             mail.msg = "项目的checklist流程被驳回，请登陆CI查看审核意见，并重新提交";
             return mail;
-        }else {
-            mail.mailto = value.response;
+        } else {
+            mail.mailto = value.response.split(',');
             mail.msg = "项目成员已提交checklist，请登录提交checklist表";
             return mail;
         }
@@ -193,9 +223,9 @@ class ChecklistManager {
      * 根据当前人 和 状态 查询数据
      * 
      */
-    selectTable(status1,status2,userMail){
+    selectTable(status1, status2, userMail) {
         // admin 用户可以查看全部 
-        if(userMail == "CITest"){
+        if (userMail == "CITest") {
             userMail = "";
         }
         return new Promise((resolve, reject) => {
@@ -219,25 +249,31 @@ class ChecklistManager {
                                     "$like": `%${userMail}%`
                                 }
                             }]
+                        },
+                        include: {
+                            model: dbModel.tableModels.PorcessNode,
+                            as:"processnode",
+                            attributes:["nodename","time","remarks","operator"]
                         }
                     }),
                     dbModel.tableModels.User
-                    .findAll({attributes: ["mail", "name"]})
+                    .findAll({ attributes: ["mail", "name"] })
                 ])
-                .then(value=>{
+                .then(value => {
                     resolve(value);
                 })
-                .catch(err =>{
+                .catch(err => {
+                    console.log(err);
                     reject();
                 })
-            })
+        })
     }
 
     /**
      * 取得 checklist.xlsx数据
      * @param {流程表的id} id 
      */
-    selectChecklistData(id){
+    selectChecklistData(id) {
         var checklistData = [];
         var data = [];
         var path = "../resourcecs/checklist/checklist" + id + ".xlsx";

@@ -37,14 +37,38 @@ class ChecklistControl {
      * 
      */
     setProcedure(args) {
+        var data = [];
+        var nodedata = [];
+
+        if (args.procedure.response.indexOf(args.userMail) != '-1') {
+            args.procedure.submit = args.userName;
+        }
+       // args.procedure.remarks = args.procedure.remarks + "    " + "提交人：  " + args.userName + " 提交时间: " + new Date().toLocaleString() + " ";
+
+        // 判断负责人数
+        if (args.procedure.response.split(",").length > 1) {
+            args.procedure.status = "resubmit";
+        }
+
+        data[0] = args.procedure;
 
         return new Promise((resolve, reject) => {
-           clManager.insert(args)
-                .then(() => {
-                    return clManager.createChecklistTable(args['checklist']);
+           clManager.insert(data)
+                .then((value) => {
+                    nodedata[0] = {
+                        procedureid : value[0].dataValues.id,
+                        nodename : "新建流程",
+                        time : new Date().toLocaleString(),
+                        remarks : args.procedure.remarks,
+                        operator : args.userName
+                    }
+                    return Promise.all([
+                        clManager.createChecklistTable(args['checklist'],value),
+                        clManager.updateNodeTable(nodedata),
+                    ]) 
                 })
                 .then(value => {
-                    clManager.sendMail(value);
+                    clManager.sendMail(value[0]);
                     resolve({
                         status: "ok"
                     });
@@ -100,19 +124,18 @@ class ChecklistControl {
 
     /**
      * 
-     * @param {*} args  提交过来的数据  主要提交表格数据 根据提交人来判断是否所有人提交完成
+     * @param {*} args  提交过来的数据    主要提交表格数据 根据提交人来判断是否所有人提交完成
      */
     handleSubmit(args) {
         let data = args;
 
-        data.submit = data.submit == "" ?data.userName : (data.submit + "," + data.userName);
-        data.remarks = data.remarks + "    "+ "提交人：" + data.userName+"提交时间"+ new Date().toLocaleString() +"/n";
+        data.submit = data.submit == "" ? data.userName : (data.submit + "," + data.userName);
+        //data.remarks = data.remarks + "    "+ "提交人：" + data.userName+"提交时间"+ new Date().toLocaleString() +"/n";
 
         // 如果所有人提交完成  改变流程状态  发送邮件
 
         if (this._ifSubmitAll(data.response, data.submit) == true) {
             data.status = "pending";
-            clManager.sendMail(data);
         } else {
             data.status = "resubmit";
         }
@@ -124,14 +147,65 @@ class ChecklistControl {
                 }
             };
 
+        let nodedata = [{
+            procedureid : data.id,
+            nodename : "提交表格",
+            time : new Date().toLocaleString(),
+            operator : data.userName
+        }]  
         return new Promise((resolve, reject) => {
-            clManager.updateTable(updataObj, where)
-                .then(() => {
+            Promise.all([
+                clManager.updateTable(updataObj, where),
+                clManager.updateNodeTable(nodedata)
+            ])
+            .then(() =>{
+                return clManager.selectId(data.id)
+            })
+            .then((value) => {
+                if(value.status = "pending"){
+                    return clManager.sendMail(value.dataValues);
+                }else{
                     resolve({ status: "ok", message: "成功" });
-                })
-                .catch(err => {
-                    reject(err);
-                });
+                }
+            })
+            .then(() => {
+                resolve({ status: "ok", message: "成功" });
+            })
+            .catch(err => {
+                reject(err);
+            });
+        });
+    }
+    /**
+     * @param {*} 修改流程 
+     */
+
+    handleEdit(args) {
+        let data = args;
+        let updataObj = data.procedure,
+            where = {
+                id: {
+                    "$eq": `${updataObj.id}`
+                }
+            };
+        let nodedata = [{
+            procedureid : updataObj.id,
+            nodename : "修改",
+            time : new Date().toLocaleString(),
+            operator : data.userName
+        }]  
+
+        return new Promise((resolve, reject) => {
+            Promise.all([
+                clManager.updateTable(updataObj, where),
+                clManager.updateNodeTable(nodedata)
+            ])
+            .then(() => {
+                resolve({ status: "ok", message: "成功" });
+            })
+            .catch(err => {
+                reject(err);
+            });
         });
     }
 
@@ -156,32 +230,47 @@ class ChecklistControl {
     handleProcedure(args) {
 
         let data = args;
-        data.date = new Date().toLocaleString();
-        data.opinion = data.opinion + "审核人： " + data.userName + "审核时间"+ data.date +"/n";
+        //data.date = new Date().toLocaleString();
+        // data.opinion = data.opinion + "审核人： " + data.userName + "审核时间"+ data.date +"/n";
         let updataObj = { status: `${data.status}`, opinion: `${data.opinion}` },
             where = {
                 id: {
                     "$eq": `${data.id}`
                 }
             };
+        let nodedata = [{
+            procedureid : data.id,
+            nodename : "审核",
+            remarks : "通过 "+ data.opinion,
+            time : new Date().toLocaleString(),
+            operator : data.userName
+        }]  
+        
         /**
          *   状态变为 resubmit 需要清空提交人重新提交 
          */
         if (data.status != "ending") {
             updataObj.submit = "";
+            nodedata[0].remarks = nodedata[0].remarks.replace(/(通过)/,"驳回");
         }
 
         return new Promise((resolve, reject) => {
-            clManager.updateTable(updataObj,where)
-                .then(() => {
-                    return clManager.sendMail(data);
-                })
-                .then(() => {
-                    resolve({ status: "ok", message: "成功" });
-                })
-                .catch(err => {
-                    reject(err);
-                });
+            Promise.all([
+                clManager.updateTable(updataObj, where),
+                clManager.updateNodeTable(nodedata)
+            ])
+            .then(() =>{
+                return clManager.selectId(data.id)
+            })
+            .then((value) => {
+                return clManager.sendMail(value.dataValues);
+            })
+            .then(() => {
+                resolve({ status: "ok", message: "成功" });
+            })
+            .catch(err => {
+                reject(err);
+            });
         });
     }
 }

@@ -14,6 +14,7 @@ const ACTIONS_MAP = {
    "/getHandleList":"getHandleList",
    "/handleProcedure":"handleProcedure",
    "/handleSubmit":"handleSubmit",
+   "/handleEdit":"handleEdit",
    "/getAllMembers":"getAllMembers"
 };
 let prop;

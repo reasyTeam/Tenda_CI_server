@@ -46,7 +46,7 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-row :gutter="20">
+      <el-row :gutter="20" v-if = "!edit" >
         <el-col :span="12">
           <el-form-item label="checklist表" prop="remarks" >
             <el-button type="text" @click="dialogTableVisible = true">填写checklist表</el-button>
@@ -54,11 +54,11 @@
         </el-col>
       </el-row>
       <!-- <checklistTable :checklistData="checklistData"></checklistTable> -->
-      <el-button type="primary" @click="beforeSubmit" class="submit">立即创建</el-button>
-      <el-button>取消</el-button>
+      <el-button v-if = "!edit" type="primary" @click="beforeSubmit" class="submit">立即创建</el-button>
+      <el-button v-if = "edit" type="primary" @click="editSubmit" class="submit">修改</el-button>
     </el-form>
 
-    <el-dialog title="checklist表" width="80%" height="50%"  :visible.sync="dialogTableVisible">
+    <el-dialog  title="checklist表" width="80%" height="50%"  :visible.sync="dialogTableVisible">
         <checklistTable :checklistData="checklistData"></checklistTable>
     </el-dialog>
   </div>
@@ -68,20 +68,11 @@
 import checklistTable from "./checkListTable.vue";
 
 export default {
-  props:["name","members","checklistData"],
+  props:["name","members","checklistData","procedure","edit"],
   data() {
     return {
       dialogTableVisible: false,
-      procedure: {
-        name: "",
-        response: [],
-        teacher: ["pengjuanli"],
-        mail: [],
-        process: "",
-        remarks: "",
-        status: "pending",
-        opinion:""
-      },
+      
       formRules:{
         name: [{
           required: true,
@@ -115,11 +106,6 @@ export default {
   components: {
     checklistTable
   },
-  watch:{
-    "members":function(newvalue,oldvalue){
-      
-    }
-  },
   methods: {
     beforeSubmit:function(){
       var that = this;
@@ -145,6 +131,20 @@ export default {
 
       this.$http.post("/api/procedure/setProcedure", submitData).then(res => {
         this.notify(res.data);
+      });
+    },
+    editSubmit:function(){
+      let submitData = {};
+      submitData.procedure = this._.cloneDeep(this.procedure);
+      delete submitData.procedure.processnode;
+      //处理一下数据
+      submitData.procedure.response = submitData.procedure.response.join(",");
+      submitData.procedure.teacher = submitData.procedure.teacher.join(",");
+      submitData.procedure.mail = submitData.procedure.mail.join(",");
+    
+      this.$http.post("/api/procedure/handleEdit", submitData).then(res => {
+        this.notify(res.data);
+        this.getHandleList();
       });
     }
   },

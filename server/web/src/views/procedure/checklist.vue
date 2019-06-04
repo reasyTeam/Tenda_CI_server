@@ -1,25 +1,36 @@
 <template>
   <el-tabs type="border-card">
     <el-tab-pane label="新增">
-      <newChecklist :name="name" :members="members" :checklistData = "checklistData"></newChecklist>
+      <NewChecklist :name="name" :members="members" :procedure = 'procedure' :checklistData = "checklistData" :edit = "edit"></NewChecklist>
     </el-tab-pane>
     <el-tab-pane label="未办理">
-      <handleChecklist v-bind:status="status[0]" :checklistData = "checklistData"></handleChecklist>
+      <handleChecklist v-bind:status="status[0]" :checklistData = "checklistData" :allMembers = "allMembers"></handleChecklist>
     </el-tab-pane>
     <el-tab-pane label="已办理">
-      <handleChecklist v-bind:status="status[1]" :checklistData = "checklistData"></handleChecklist>
+      <handleChecklist v-bind:status="status[1]" :checklistData = "checklistData" :allMembers = "allMembers"></handleChecklist>
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script>
-import NewChecklist from "./NewChecklist.vue";
+import NewChecklist from "./newchecklist.vue";
 import HandleChecklist from "./handleChecklist.vue";
 export default {
   data() {
     return {
       status: ["pending", "ending"],
       name : "",
+      procedure: {
+        name: "",
+        response: [],
+        teacher: ["pengjuanli"],
+        mail: [],
+        process: "",
+        remarks: "",
+        status: "pending",
+        opinion:""
+      },
+      edit:false,
       members:[],
       checklistData: [
         {
@@ -202,7 +213,7 @@ export default {
   },
   components: {
     //key 是组件名 value 是组件对象 可简写
-    newChecklist: NewChecklist,
+    NewChecklist: NewChecklist,
     handleChecklist: HandleChecklist
   },
   methods: {
