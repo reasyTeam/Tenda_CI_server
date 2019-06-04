@@ -132,8 +132,8 @@ class ChecklistManager {
         console.log("邮件抄送给" + mail.copyTo);
 
         // debug 使用 邮件不发出去 只发给自己
-        mail.mailto = ['yangchunmei'];
-        mail.copyTo = [];
+        // mail.mailto = ['yangchunmei'];
+        // mail.copyTo = [];
 
         return new Promise((resolve, reject) => {
 
