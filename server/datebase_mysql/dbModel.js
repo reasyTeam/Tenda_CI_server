@@ -249,7 +249,7 @@ class DataBaseModal {
          * checklist 流程表
          * @param{id}  自动生成的 
          * @param{name} 项目名称 可重复
-         * @param{remark}  备注  
+         * @param{remark}  备注    
          * @param{status}  流程运行状态   1. pending 等待审批   3. resubmit 待全部提交（被驳回or 其他多人项目成员未提交checklist）  3.ending 完成  （发送给负责人） 
          */
         this.tableModels.Procedure = this.sequelize.define('procedure', {
@@ -290,6 +290,38 @@ class DataBaseModal {
             freezeTableName: true
         });
 
+        /**
+         * checklist 流程表
+         * @param{nodename}    流程的节点
+         * @param{procedureid}   流程的id 
+         * @param{remarks}  备注
+         * @param{time}  时间
+         * @param{operator}  操作人员  
+         */
+        this.tableModels.PorcessNode = this.sequelize.define('porcessnode', {
+            nodename: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            procedureid: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
+            remarks: {
+                type: Sequelize.TEXT,
+            },
+            time:{
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            operator: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            }
+        }, {
+            freezeTableName: true
+        });
+
 
 
         //关系定义
@@ -309,6 +341,12 @@ class DataBaseModal {
         });
         this.tableModels.ProductCopyTo.belongsTo(this.tableModels.User, {
             foreignKey: "mail"
+        });
+
+        this.tableModels.Procedure.hasMany(this.tableModels.PorcessNode, {
+            foreignKey: 'procedureid',
+            sourceKey: 'id',
+            as:"processnode"
         });
 
         return new Promise((resolve, reject) => {
@@ -399,6 +437,7 @@ class DataBaseModal {
                             { name: "O3V6.0", response: "yangchunmei",teacher: "yangchunmei", mail: "fdf", remarks: "pesdffdgngjuanli", status: "starting",process:"1",submit:"" }
                         ]);
                     })
+
                     .then(resolve)
                     .catch(err => {
                         console.info("初始化数据库shuju时出现错误");

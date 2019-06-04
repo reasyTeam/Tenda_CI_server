@@ -19,6 +19,7 @@ class DataBasicModel{
             this.initConnection();
             console.log("初始化数据库中......");
             this.testConnection()
+                .then(this.deleteTableExits)
                 .then(this.initTableStruct)
                 .then(this.createTestData)
                 .then(() => {
@@ -62,16 +63,15 @@ class DataBasicModel{
                 });
         });
     }
-
-    
+  
     //初始化之前需要先删除已有表格，因为存在外键约束，所以需要先删除子表
     deleteTableExits() {
         return new Promise((resolve, reject) => {
             if (this.isFirst) {
-                this.sequelize.queryInterface.dropTable("procedure")
+                this.sequelize.queryInterface.dropTable("porcessnode")
                     .then(() => {
                         console.log("");
-                        console.log("procedure表删除");
+                        console.log("porcessnode表删除");
                         resolve();
                     })
                     .catch(reject);
@@ -81,68 +81,130 @@ class DataBasicModel{
         });
     }
 
+    //初始化之前需要先删除已有表格，因为存在外键约束，所以需要先删除子表
+    // deleteTableExits() {
+    //     return new Promise((resolve, reject) => {
+    //     Promise.all([
+    //         this.sequelize.queryInterface.dropTable("porcessnode"),
+    //         this.sequelize.queryInterface.dropTable("procedure")
+    //     ])
+    //         .then(() => {
+    //             console.log("");
+    //             console.log("procedure表删除");
+    //             resolve();
+    //         })
+    //         .catch(reject);
+    //     });
+    // }    
+
     initTableStruct() {
-          /**
-        * checklist 流程表
-        * @param{id}  自动生成的 
-        * @param{name} 项目名称 可重复
-        * @param{remark}  备注  
-        * @param{status}  流程运行状态   1. pending 等待审批   3. resubmit 待全部提交（被驳回or 其他多人项目成员未提交checklist）  3.ending 完成  （发送给负责人） 
-        */
-       this.tableModels.Procedure = this.sequelize.define('procedure', {
-           name: {
-               type: Sequelize.STRING(255),
-               allowNull: false
-           },
-           response: {
-               type: Sequelize.STRING(255),
-               allowNull: false
-           },
-           remarks: {
-               type: Sequelize.TEXT,
-           },
-           teacher:{
-               type: Sequelize.STRING(255),
-               allowNull: false
-           },
-           mail: {
-               type: Sequelize.STRING(255),
-               allowNull: false
-           },
-           process: {
-               type: Sequelize.STRING(255),
-               allowNull: false
-           },
-           status: {
-               type: Sequelize.STRING(20),
-               allowNull: false
-           },
-           opinion:{
-               type: Sequelize.TEXT,
-           },
-           submit:{
-               type: Sequelize.STRING(255),
-           }
-       }, {
-           freezeTableName: true
-       });
 
-       
-       return new Promise((resolve,reject) => {
-        const force = this.force;
-        if (this.isFirst) {
+                /**
+         * checklist 流程表
+         * @param{id}  自动生成的 autoIncrement: true
+         * @param{name} 项目名称 可重复
+         * @param{remark}  备注    
+         * @param{status}  流程运行状态   1. pending 等待审批   3. resubmit 待全部提交（被驳回or 其他多人项目成员未提交checklist）  3.ending 完成  （发送给负责人） 
+         */
+        this.tableModels.Procedure = this.sequelize.define('procedure', {
+            name: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            response: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            remarks: {
+                type: Sequelize.TEXT,
+            },
+            teacher:{
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            mail: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            process: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            status: {
+                type: Sequelize.STRING(20),
+                allowNull: false
+            },
+            opinion:{
+                type: Sequelize.TEXT,
+            },
+            submit:{
+                type: Sequelize.STRING(255),
+            }
+        }, {
+            freezeTableName: true
+        });
 
-            this.tableModels.Procedure
-                .sync({ force: this.force })
-                .then(resolve)
-                .catch(err => {
-                    console.info("初始化数据库结构时出现错误");
-                    reject(err);
-                });
-        } else {
-            resolve();
-        }
-       })
+                // 添加流程节点数据库
+        /**
+         * checklist 流程表
+         * @param{nodename}    流程的节点
+         * @param{procedureid}   流程的id 
+         * @param{remarks}  备注
+         * @param{time}  时间
+         * @param{operator}  操作人员  
+         */
+        this.tableModels.PorcessNode = this.sequelize.define('porcessnode', {
+            nodename: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            procedureid: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
+            remarks: {
+                type: Sequelize.TEXT,
+            },
+            time:{
+                type: Sequelize.STRING(255),
+                defaultValue: new Date(),
+                allowNull: false
+            },
+            operator: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            }
+        }, {
+            freezeTableName: true
+        });
+
+
+        this.tableModels.Procedure.hasMany(this.tableModels.PorcessNode, {
+            foreignKey: 'procedureid', sourceKey: 'id'
+        });
+
+        return new Promise((resolve, reject) => {
+            //同步实例与DB
+            const force = this.force;
+            if (this.isFirst) {
+                    Promise.all([
+                       // this.tableModels.Procedure.sync({ force }),
+                    ])
+                    .then(() => {
+                        return Promise.all([
+                            this.tableModels.PorcessNode.sync({ force })
+                        ]);
+                    })
+                    .then(resolve)
+                    .catch(err => {
+                        console.info("初始化数据库结构时出现错误");
+                        console.info(err);
+                        reject(err);
+                    });
+            } else {
+                resolve();
+            }
+        });
     
     }
 
@@ -150,11 +212,15 @@ class DataBasicModel{
     createTestData() {
         return new Promise((resolve, reject) => {
             if (this.shouldCreateData) {
-                this.tableModels.Procedure.bulkCreate([
+                // this.tableModels.Procedure.bulkCreate([
+                //     //
+                //     { name: "O3V2.0", response: "yangchunmei",teacher: "yangchunmei", mail: "yangchunmei", remarks: "pengjuadfdgfnli", status: "pending" ,process:"1",submit:"杨春梅"},
+                //     { name: "O3V1.0", response: "yangchunmei,yanhuan",teacher: "yangchunmei", mail: "yangchunmei", remarks: "pengsdfsfjuanli", status: "resubmit",process:"1" ,submit:"杨春梅"},
+                // ])
+                this.tableModels.PorcessNode.bulkCreate([
                     //
-                    { name: "O3V2.0", response: "yangchunmei",teacher: "yangchunmei", mail: "yangchunmei", remarks: "pengjuadfdgfnli", status: "pending" ,process:"1",submit:"杨春梅"},
-                    { name: "O3V1.0", response: "yangchunmei,yanhuan",teacher: "yangchunmei", mail: "yangchunmei", remarks: "pengsdfsfjuanli", status: "resubmit",process:"1" ,submit:"杨春梅"},
-                 
+                    { procedureid :"1", nodename:'修改',remarks:'',operator:'aaa',time:new Date()},
+                    { procedureid :"1", nodename:'添加',remarks:'',operator:'aaa' ,time: new Date()},
                 ])
                 .then(resolve)
                 .catch(err=> {
