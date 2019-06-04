@@ -24,6 +24,7 @@ const ACTIONS_MAP = {
     "/setNewPro": "newProLine",
     "/getAllProducts": "getAllProducts",
     "/editProduct": "editProduct",
+    "/deleteProduct": "deleteProduct",
     "/getCompileProducts": "getCompileProducts"
 };
 let prop,

@@ -157,10 +157,26 @@
                 this.dialogForm.key = data.product;
                 this.dialogVisible = true;
             },
-            handleDelete: function() {
-                this.$alert('为了防止意外删除项目，请前往数据库管理页面手动删除', '提示', {
-                    confirmButtonText: '确定'
-                });
+            handleDelete: function(index,data) {
+                // this.$alert('为了防止意外删除项目，请前往数据库管理页面手动删除', '提示', {
+                //     confirmButtonText: '确定'
+                // });
+                let submitData = this._.cloneDeep(data),
+                    that = this;
+                delete submitData.allMembers;
+                delete submitData.productLines;
+                delete submitData.member;
+                delete submitData.copyTo;
+                this.$http
+                    .post("/api/CI/deleteProduct", submitData)
+                    .then(res => {
+                        that.dialogLoading = false;
+                        that.notify(res.data);
+                        if (res.data.status == "ok") {
+                            that.dialogVisible = false;
+                            that.getAllDatas();
+                        }
+                    });
             },
             getAllDatas: function() {
                 let that = this;
