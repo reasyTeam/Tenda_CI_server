@@ -31,6 +31,6 @@
     "mysql2": "^1.6.4",
     "node-xlsx": "^0.14.1",
     "nodemailer": "^4.6.4",
-    "sequelize": "^4.41.2",
+    "sequelize": "^4.41.2"
   }
 }
