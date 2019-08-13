@@ -8,11 +8,12 @@ import CIRouter from "./CIRouter";
 import adminRouter from "./adminRouter";
 import toolRouter from "./toolRouter";
 import procedureRouter from "./procedureRouter";
+import resourcesRouter from "./resourcesRouter";
 let routes = [{
   path: '/',
   name: 'home',
   component: index
-}, ...CIRouter, ...adminRouter, ...toolRouter,...procedureRouter];
+}, ...CIRouter, ...adminRouter, ...toolRouter,...procedureRouter,...resourcesRouter];
 
 export default new Router({
   routes

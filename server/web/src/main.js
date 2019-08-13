@@ -12,12 +12,14 @@ import './assets/css/custom.css';
 import _ from "lodash";
 import VueCropper from 'vue-cropper'
 import { isArray } from 'util';
+import Vue2OrgTree from 'vue2-org-tree';
 
 //Use element-ui framework
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(vue_http);
 Vue.use(VueCropper)
+Vue.use(Vue2OrgTree)// 树形结构
 
 Vue.prototype._ = _;
 
