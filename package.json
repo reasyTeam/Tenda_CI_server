@@ -15,7 +15,10 @@
   "author": "Zhuyi",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.5.5",
     "archiver": "^2.1.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "ejsexcel": "^3.5.3",
@@ -28,6 +31,6 @@
     "mysql2": "^1.6.4",
     "node-xlsx": "^0.14.1",
     "nodemailer": "^4.6.4",
-    "sequelize": "^4.41.2"
+    "sequelize": "^4.41.2",
   }
 }

@@ -16,6 +16,7 @@ const dbModal = require("../datebase_mysql/dbModel");
 const ResourceRouter = require("./api/resource/api_resource");
 const StaticRouter = require("./api/resource/static_resource");
 const CIRouter = require("./api/CI/api_CI");
+const WorkRouter = require("./api/workdoc/api_workdoc.js");
 const CompileRouter = require("./api/tools/api_compile");
 const OemRouter = require("./api/tools/api_oem");
 const LoginRouter = require("./api/login/login");
@@ -109,10 +110,14 @@ class HttpServer {
                 res.sendFile(path.join(__dirname, "../web/dist/login.html"));
             }
         });
+        // app.get("/api/work/download/excel/:productName", (req, res) => {
+        //     console.log('aaa');
+        // });
          //使用各模块路由
         app.use("/api/CI", CIRouter);
         app.use("/api/compile", CompileRouter);
         app.use("/api/oem", OemRouter);
+        app.use("/api/work",WorkRouter);
         app.use("/api/procedure", ProcedureRouter);
         //将web_ui设置为静态资源目录
         app.use(express.static(path.join(__dirname, '../web/dist')));

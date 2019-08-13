@@ -52,6 +52,10 @@ class BasicConfig {
             imgBackupFolder: path.join(__dirname, "../../OEM_storage", "img_backup_dir"),
             oemTempCheckFolder: path.join(__dirname, "../../OEM_storage", "oem_check_dir")
         };
+
+        this.workConfig = {
+            root: path.join(__dirname,"../resourcecs/workdoc/")
+        }
     }
 }
 module.exports = new BasicConfig();
