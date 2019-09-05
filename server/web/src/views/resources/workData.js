@@ -179,8 +179,8 @@ var detailData =  {
             },
             {
                 "type":'link',
-                "content":"《浏览器与操作系统前端分层支持方案V2.0》",
-                "link":'浏览器与操作系统前端分层支持方案V2.0.doc'
+                "content":"《浏览器与操作系统前端分层支持方案V3.0》",
+                "link":'浏览器与操作系统前端分层支持方案V3.0.doc'
             },
             {
                 "type":'link',
@@ -346,10 +346,19 @@ var detailData =  {
                 "content":"2、注意浏览器兼容和需求",
              },
              {
+              "type":'link',
+              "content":"《浏览器与操作系统前端分层支持方案V3.0》",
+              "link":'浏览器与操作系统前端分层支持方案V3.0.doc'
+             },
+             {
                 "type":'link',
                 "content":"软件版本转测试checklist表",
                 "link":"checklist.xlsx"
-
+             },
+             {
+              "type":'link',
+              "content":"《Tenda产品软件界面输入规格及反馈语标准》并附 WEB规格检查清单",
+              "link":'Tenda产品软件界面输入规格及反馈语标准.xlsx'
              }
         ]
     },
@@ -468,6 +477,7 @@ var codeLines = [
                 {
                   "id":14,
                   "label":"【支撑项目】：AC9v3.0，AC18v1.0等",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/UGW5.0_ALI_ROUTER/SourceCodes/Branches/AC6v2.0/AC_PRODUCT_SVN5449/prod/httpd/11ac/web",
                   expand:true,
                 }
               ]
@@ -480,6 +490,7 @@ var codeLines = [
                 {
                   "id":16,
                   "label":"【支撑项目】：AC15v1.0,AC7v1.0 备注：较少维护",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/UGW5.0_ALI_ROUTER/SourceCodes/Trunk/AC_PRODUCT/develop_svn2383/prod/httpd/11ac/web",
                   expand:true,
                 }
               ]
@@ -492,6 +503,7 @@ var codeLines = [
                 {
                   "id":17,
                   "label":"【支撑项目】：AC10Uv1.0、AC21&AC23v1.0【1900M市场】",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/UGWV6.0_P/SourceCodes/Trunk/develop/develop_svn3473/prod/httpd/11ac/web",
                   expand:true,
                 }
               ]
@@ -504,6 +516,7 @@ var codeLines = [
                 {
                   "id":18,
                   "label":"【支撑项目】：AC6v3.0， AC6v4.0， AC7v2.0，AC8v2.0,AC11v2.0 【技术栈】：fis3，sea.js ",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/ECOSV2.0_11AC/SourceCodes/Trunk/RTK_819X/userSpace/prod/http/web/AC5_cn_normal_src  【目前不再维护的路径】：http://192.168.100.233:18080/svn/GNEUI/SourceCodes/Trunk/GNEUIv1.0/temp/AC6V3.0",
                   expand:true,
                 }
               ]
@@ -521,7 +534,8 @@ var codeLines = [
               "children":[
                 {
                   "id":19,
-                  "label":"【支撑项目】：F9v1.0 【技术栈】：fis3，sea.js",
+                  "label":"【支撑项目】：F9v1.0 【技术栈】：fis3，sea.js 【备注】：目前已不再维护",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/ECOSV2.0/SourceCodes/Trunk/RTK_819X/userSpace/prod/http/web/F9_cn_normal_src ",
                   expand:true,
                 }
               ]
@@ -535,6 +549,8 @@ var codeLines = [
                 {
                   "id":20,
                   "label":"【支撑项目】：F3v4.0、F6v4.0、N301v4.0  【备注】：ECOS不区分版本，底层代码基本都是同一套 ",
+                 
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/ECOSV3.0/SourceCodes/Trunk/QCAXXX/userSpace/prod/http/web/AC5_cn_normal_src",
                   expand:true,
                 }
               ]
@@ -564,6 +580,7 @@ var codeLines = [
                 {
                   "id":21,
                   "label":"【支撑项目】：A9v2.0、A301V3.0（单频）【技术栈】：webpack,Vue.js", 
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/ECOSV3.0/SourceCodes/Branches/A12V2.0/QCAXXX_SVN693/userSpace/prod/http/web/extender_multi_normal_src",
                   expand:true,
                 }
               ]
@@ -576,11 +593,13 @@ var codeLines = [
                 {
                   "id":22,
                   "label":"【支撑项目】：A18v2.0(双频)  【备注】：最新主线",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/ECOSV2.0_11AC/SourceCodes/Branches/A18V2.0/RTK_819X_SVN1253/userSpace/prod/http/web/AC5_cn_normal_src ",
                   expand:true,
                 },
                 {
                   "id":23,
                   "label":"【支撑项目】：A18v1.0（双频）A301v1.0（单频） 【技术栈】：fis3，sea.js",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/EROS/SourceCodes/Branches/A18/develop_svn2389/prod/httpd/web/A18 ",
                   expand:true,
                 },
                 {
@@ -611,6 +630,7 @@ var codeLines = [
                 {
                   "id":14,
                   "label":"【支撑项目】：W40APv1.0, I9v1.0，AP325v1.0  【技术栈】：none",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/RTL-AP/SourceCodes/Branches/i9V2.0/rtl819x-SDK-v3.4.6.6_svn772/prod/httpd/ap_web/web_W40AP ",
                 }
               ]
             },
@@ -622,10 +642,12 @@ var codeLines = [
                 {
                   "id":16,
                   "label":"【支撑项目】：I21v1.0， W33APv1.0, W60APv1.0  【技术栈】：fis3，sea.js",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/EAOS/SourceCodes/Branches/i21/develop_svn861/prod/httpd/ap_web/ugw5.1_realtek_indoorAP_web ",
                 },
                 {
                   "id":16,
                   "label":"【支撑项目】：W9v1.0  【技术栈】：fis3，sea.js",
+                  "detail":"【svn路径】：待查",
                 },
               ]
             },
@@ -637,6 +659,7 @@ var codeLines = [
                 {
                   "id":17,
                   "label":"【支撑项目】：AP350v1.0、W63APv1.0、I24v1.0  【技术栈】：webpack,reasyComponent, es6 【备注】：归一后的AP，AP与网桥的CGI，UI统一化",
+                  "detail":"http://192.168.100.233:18080/svn/EAOS/SourceCodes/Branches/AP350/develop_qualcomm_SVN2955/prod/httpd/ap_web/web/src",
                 }
               ]
             }
@@ -654,10 +677,12 @@ var codeLines = [
                 {
                   "id":18,
                   "label":"【支撑项目】：O2v1.0，CPE6v1.0、B6&O4、AP4&AP5v1.0 【技术栈】：webpack,reasyComponent, es6",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/EAOS/SourceCodes/Trunk/develop_qualcomm/prod/httpd/ap_web/web_outdoor",
                 },
                 {
                   "id":19,
                   "label":"【支撑项目】：O3v2.0",
+                  "detail":"【svn路径】：待查",
                 },
               ]
             },
@@ -670,6 +695,7 @@ var codeLines = [
                 {
                   "id":20,
                   "label":"【支撑项目】：O1v1.0 【备注】：较少维护",
+                  "detail":"【svn路径】：待查",
                 }
               ]
             }
@@ -687,10 +713,12 @@ var codeLines = [
                 {
                   "id":18,
                   "label":"【支撑项目】：W15Ev2.0\ W18Ev1.0 【技术栈】：webpack,reasyComponent, es6  【备注】：一套src 多套dist目录",
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/WEIQI_UGW6.0/SourceCodes/Trunk/prod/httpd/web/Tenda/dist",
                 },
                 {
                   "id":19,
                   "label":"【支撑项目】：EW9v2.0",
+                  "detail":"【svn路径】：待查",
                 },
               ]
             },
@@ -703,6 +731,7 @@ var codeLines = [
             {
               "id":12,
               "label":"AC3000 【技术栈】：es6 【备注】：较少维护",
+              "detail":"【svn路径】：http://192.168.100.233:18080/svn/NGWAC/SourceCodes/Trunk/v1.0/wac/src/webui",
             },
           ]
         }
@@ -727,6 +756,7 @@ var codeLines = [
                 {
                   "id":14,
                   "label":"【支撑项目】：G3328Pv1.0  【技术栈】：webpack,vue, es6 " ,
+                  "detail":"【svn路径】：http://192.168.100.233:18080/svn/TSW/SourceCodes/Trunk/app/projects/G3328P/www",
                 }
               ]
             },

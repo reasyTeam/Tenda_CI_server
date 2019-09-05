@@ -7,7 +7,7 @@
     <el-tab-pane label="代码线">
       <div>
             <Vue2OrgTree :data="codeLines[0]" @on-expand="onExpand" 
-            :render-content="renderContent" :horizontal="horizontal" :collapsable="collapsable" label-class-name="bg-white"/>
+            :render-content="renderContent" :horizontal="horizontal" :collapsable="collapsable" label-class-name="bg-white" @on-node-click="onNodeClick" />
              <Vue2OrgTree :data="codeLines[1]" @on-expand="onExpand" 
             :render-content="renderContent" :horizontal="horizontal" :collapsable="collapsable" label-class-name="bg-white"/>
              <Vue2OrgTree :data="codeLines[2]" @on-expand="onExpand" 
@@ -106,6 +106,14 @@ import rGantt from "./rGantt.vue";
           child.children && _this.collapse(child.children);
         });
       },
+      onNodeClick(e,data){
+        data.detail &&  this.$notify({
+          title: data.label,
+          message: `<div class="break"> ${data.detail}</div>`,
+          duration: 0,
+          dangerouslyUseHTMLString: true,
+        });
+      }
     }
   }
 </script>
@@ -134,5 +142,8 @@ import rGantt from "./rGantt.vue";
 }
 .org-tree-node-label-inner{
   font-size: 14px;
+}
+.break{
+  word-break: break-all;
 }
 </style>
