@@ -333,6 +333,9 @@ class DataBaseModal {
                 type: Sequelize.STRING(255),
                 allowNull: false
             },
+            typesOf: {
+                type: Sequelize.STRING(255),
+            },
             description: {
                 type: Sequelize.STRING(255),
             },

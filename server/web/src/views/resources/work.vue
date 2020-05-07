@@ -211,7 +211,7 @@ export default {
     },
     // 新增提交
     submit() {
-      this.$refs.ruleForm.validate(valid => {
+      this.$refs["ruleForm"].validate(valid => {
         if (valid) {
           let submitUrl,
             submitData = this.ruleForm;
@@ -229,7 +229,7 @@ export default {
             this.getWorkResourcesList();
           });
         } else {
-          this.notify("输入有误，请检查后提交");
+          this.$notify.error("输入有误，请检查后提交");
           return false;
         }
       });
@@ -244,7 +244,7 @@ export default {
     },
     // 表单重置
     resetForm() {
-      this.$refs.ruleForm.resetFields();
+      this.$refs["ruleForm"] && this.$refs["ruleForm"].resetFields();
     }
   }
 };
