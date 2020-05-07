@@ -233,7 +233,7 @@ export default {
         // if(res.body.indexOf('<!DOCTYPE') !=-1){
         //     window.location.href ="./";
         //  }
-         this.members =res.body.members;
+         this.members = res.body.members;
          this.members.splice(0,1); // admin 需要去掉
       });
     }

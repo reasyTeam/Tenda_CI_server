@@ -1,3 +1,4 @@
+//此页面用于在不修改有数据库的情况下添加数据库表格
 const Sequelize = require("sequelize");
 const MYSQL_CONFIG = require("../config/mysql_config");
 
@@ -15,7 +16,7 @@ class DataBasicModel{
     }
 
     init(){
-        return new Promise((reslove,reject) => {
+        return new Promise((resolve,reject) => {
             this.initConnection();
             console.log("初始化数据库中......");
             this.testConnection()
@@ -68,10 +69,9 @@ class DataBasicModel{
     deleteTableExits() {
         return new Promise((resolve, reject) => {
             if (this.isFirst) {
-                this.sequelize.queryInterface.dropTable("porcessnode")
+                this.sequelize.queryInterface.dropTable("resource")
                     .then(() => {
-                        console.log("");
-                        console.log("porcessnode表删除");
+                        console.log("resource表删除");
                         resolve();
                     })
                     .catch(reject);
@@ -81,107 +81,31 @@ class DataBasicModel{
         });
     }
 
-    //初始化之前需要先删除已有表格，因为存在外键约束，所以需要先删除子表
-    // deleteTableExits() {
-    //     return new Promise((resolve, reject) => {
-    //     Promise.all([
-    //         this.sequelize.queryInterface.dropTable("porcessnode"),
-    //         this.sequelize.queryInterface.dropTable("procedure")
-    //     ])
-    //         .then(() => {
-    //             console.log("");
-    //             console.log("procedure表删除");
-    //             resolve();
-    //         })
-    //         .catch(reject);
-    //     });
-    // }    
-
     initTableStruct() {
-
-                /**
-         * checklist 流程表
-         * @param{id}  自动生成的 autoIncrement: true
-         * @param{name} 项目名称 可重复
-         * @param{remark}  备注    
-         * @param{status}  流程运行状态   1. pending 等待审批   3. resubmit 待全部提交（被驳回or 其他多人项目成员未提交checklist）  3.ending 完成  （发送给负责人） 
+        /**
+         * 资源路径列表
+         * @param{name}   资源的名称
+         * @param{description}   资源的描述
+         * @param{address}  资源的路径
          */
-        this.tableModels.Procedure = this.sequelize.define('procedure', {
+        this.tableModels.Resource = this.sequelize.define('resource', {
             name: {
                 type: Sequelize.STRING(255),
                 allowNull: false
             },
-            response: {
+            typesOf: {
                 type: Sequelize.STRING(255),
-                allowNull: false
             },
-            remarks: {
-                type: Sequelize.TEXT,
-            },
-            teacher:{
+            description: {
                 type: Sequelize.STRING(255),
-                allowNull: false
             },
-            mail: {
-                type: Sequelize.STRING(255),
-                allowNull: false
-            },
-            process: {
-                type: Sequelize.STRING(255),
-                allowNull: false
-            },
-            status: {
-                type: Sequelize.STRING(20),
-                allowNull: false
-            },
-            opinion:{
-                type: Sequelize.TEXT,
-            },
-            submit:{
+            address: {
                 type: Sequelize.STRING(255),
             }
         }, {
             freezeTableName: true
         });
 
-                // 添加流程节点数据库
-        /**
-         * checklist 流程表
-         * @param{nodename}    流程的节点
-         * @param{procedureid}   流程的id 
-         * @param{remarks}  备注
-         * @param{time}  时间
-         * @param{operator}  操作人员  
-         */
-        this.tableModels.PorcessNode = this.sequelize.define('porcessnode', {
-            nodename: {
-                type: Sequelize.STRING(255),
-                allowNull: false
-            },
-            procedureid: {
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            remarks: {
-                type: Sequelize.TEXT,
-            },
-            time:{
-                type: Sequelize.STRING(255),
-                defaultValue: new Date(),
-                allowNull: false
-            },
-            operator: {
-                type: Sequelize.STRING(255),
-                allowNull: false
-            }
-        }, {
-            freezeTableName: true
-        });
-
-
-        this.tableModels.Procedure.hasMany(this.tableModels.PorcessNode, {
-            foreignKey: 'procedureid', sourceKey: 'id'
-        });
 
         return new Promise((resolve, reject) => {
             //同步实例与DB
@@ -192,7 +116,7 @@ class DataBasicModel{
                     ])
                     .then(() => {
                         return Promise.all([
-                            this.tableModels.PorcessNode.sync({ force })
+                            this.tableModels.Resource.sync({ force })
                         ]);
                     })
                     .then(resolve)
@@ -217,10 +141,65 @@ class DataBasicModel{
                 //     { name: "O3V2.0", response: "yangchunmei",teacher: "yangchunmei", mail: "yangchunmei", remarks: "pengjuadfdgfnli", status: "pending" ,process:"1",submit:"杨春梅"},
                 //     { name: "O3V1.0", response: "yangchunmei,yanhuan",teacher: "yangchunmei", mail: "yangchunmei", remarks: "pengsdfsfjuanli", status: "resubmit",process:"1" ,submit:"杨春梅"},
                 // ])
-                this.tableModels.PorcessNode.bulkCreate([
+                // this.tableModels.PorcessNode.bulkCreate([
+                //     //
+                //     { procedureid :"1", nodename:'修改',remarks:'',operator:'aaa',time:new Date()},
+                //     { procedureid :"1", nodename:'添加',remarks:'',operator:'aaa' ,time: new Date()},
+                // ])
+                this.tableModels.Resource.bulkCreate([
                     //
-                    { procedureid :"1", nodename:'修改',remarks:'',operator:'aaa',time:new Date()},
-                    { procedureid :"1", nodename:'添加',remarks:'',operator:'aaa' ,time: new Date()},
+                    {
+                        name: '组内部分代码线位置',
+                        typesOf: "work",
+                        description: '【各主线代码】',
+                        address: 'http://192.168.100.233:18080/svn/GNEUI',
+                    }, 
+                    {
+                        name: '组内资料文档位置',
+                        typesOf: "work",
+                        description: '【主要存放培训课件、制度规范、项目总结文档等,svn用户名 全拼小写，密码123456】',
+                        address: 'http://192.168.99.17:8083/svn/软件开发部/05.资源组文件/04.前端开发'
+                    }, {
+                        name: '组内gitHub地址',
+                        typesOf: "work",
+                        description: '【主要存放组件源码及工具包等】',
+                        address: 'https://github.com/reasyTeam',
+                    }, {
+                        name: 'bugfree',
+                        typesOf: "work",
+                        description: '【查看项目bug，关闭bug】',
+                        address: 'http://192.168.100.23/bugfree/index.php?r=site/login'
+                    },{
+                        name: '中转文件位置',
+                        typesOf: "work",
+                        description: '【 用于公司电脑之间，文件中转 】',
+                        address: 'http://192.168.99.241-999中转文件夹'
+                    }, {
+                        name: 'testLink',
+                        typesOf: "work",
+                        description: '【 测试用例  用户名 全拼小写 密码123456 】',
+                        address: 'http://192.168.100.23/testlink/index.php?caller=login'
+                    },{
+                        name: 'eoa',
+                        typesOf: "work",
+                        description: '【 考勤查询，请假签卡流程提交  】',
+                        address: 'http://eoa.tenda.cn'
+                    },{
+                        name: 'agile',
+                        typesOf: "work",
+                        description: '【 项目情况，填写工时 】',
+                        address: 'http://plm.tenda.cn:7001/Agile/default/login-cms.jsp'
+                    }, {
+                        name: 'CI服务器路径',
+                        typesOf: "work",
+                        description: '【 在线工具等 用户名 中文用户名  密码 全拼小写 】',
+                        address: 'http://192.168.99.17'
+                    }, {
+                        name: '翻译工具',
+                        typesOf: "tool",
+                        description: '【组内翻译工具】',
+                        address: 'https://github.com/reasyTeam/b28-cli'
+                    }
                 ])
                 .then(resolve)
                 .catch(err=> {

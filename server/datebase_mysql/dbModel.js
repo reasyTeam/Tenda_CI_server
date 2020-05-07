@@ -322,7 +322,26 @@ class DataBaseModal {
             freezeTableName: true
         });
 
-
+        /**
+         * 资源路径列表
+         * @param{name}   资源的名称
+         * @param{description}   资源的描述
+         * @param{address}  资源的路径
+         */
+        this.tableModels.Resource = this.sequelize.define('resource', {
+            name: {
+                type: Sequelize.STRING(255),
+                allowNull: false
+            },
+            description: {
+                type: Sequelize.STRING(255),
+            },
+            address: {
+                type: Sequelize.STRING(255),
+            }
+        }, {
+            freezeTableName: true
+        });
 
         //关系定义
         this.tableModels.User.hasMany(this.tableModels.ProductMember, {
@@ -363,7 +382,9 @@ class DataBaseModal {
                             this.tableModels.Procedure.sync({ force: this.force }),
                             this.tableModels.ProductCopyTo.sync({ force: this.force }),
                             this.tableModels.ProductMember.sync({ force: this.force }),
-                            this.tableModels.OEM.sync({ force: this.force })
+                            this.tableModels.PorcessNode.sync({ force }),
+                            this.tableModels.OEM.sync({ force: this.force }),
+                            this.tableModels.Resource.sync({ force: this.force })
                         ]);
                     })
                     .then(resolve)
@@ -438,9 +459,14 @@ class DataBaseModal {
                         ]);
                     })
 
+                    .then(() => {
+                        return  this.tableModels.Resource.bulkCreate([
+                            { name :"组内资料文档位置", typesOf: "tool", description:'【各主线代码】',address:'http://192.168.100.233:18080/svn/GNEUI'}
+                        ])
+                    })
                     .then(resolve)
                     .catch(err => {
-                        console.info("初始化数据库shuju时出现错误");
+                        console.info("初始化数据库数据时出现错误");
                         reject(err);
                     });
             }

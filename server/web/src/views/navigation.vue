@@ -22,7 +22,7 @@
         <el-submenu index="/resources">
             <template slot="title">资料</template>
             <el-menu-item index="/resources/work">工作资料</el-menu-item>
-            <el-menu-item index="/resources/study">培训和分享资料</el-menu-item>
+            <!-- <el-menu-item index="/resources/study">培训和分享资料</el-menu-item> -->
         </el-submenu>
 
         <el-menu-item index="/admin/adminMana">后台管理</el-menu-item>

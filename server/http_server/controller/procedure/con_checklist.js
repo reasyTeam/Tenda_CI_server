@@ -1,9 +1,5 @@
 //引入数据库
 const dbModel = require("../../../datebase_mysql/dbModel");
-const Mailer = require("../../../mail_server/mail");
-const ejsExcel = require("ejsExcel");
-const fs = require("fs");
-const xlsx = require("node-xlsx");
 const clManager = require("../../models/procedure/checklistManager")
 
 class ChecklistControl {
@@ -43,8 +39,7 @@ class ChecklistControl {
         if (args.procedure.response.indexOf(args.userMail) != '-1') {
             args.procedure.submit = args.userName;
         }
-       // args.procedure.remarks = args.procedure.remarks + "    " + "提交人：  " + args.userName + " 提交时间: " + new Date().toLocaleString() + " ";
-
+        
         // 判断负责人数
         if (args.procedure.response.split(",").length > 1) {
             args.procedure.status = "resubmit";

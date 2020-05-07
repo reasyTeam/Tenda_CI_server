@@ -767,51 +767,6 @@ var codeLines = [
 
   ];
 
-var resourceTableData= [
-    {
-        name: '组内资料文档位置',
-        description: '【各主线代码】',
-        address: 'http://192.168.100.233:18080/svn/GNEUI',
-    }, {
-        name: '组内资料文档位置',
-        description: '【主要存放培训课件、制度规范、项目总结文档等,svn用户名 全拼小写，密码123456】',
-        address: 'http://192.168.99.17:8083/svn/软件开发部/05.资源组文件/04.前端开发'
-    }, {
-        name: '组内gitHub地址',
-        description: '【主要存放组件源码及工具包等】',
-        address: 'https://github.com/reasyTeam',
-    }, {
-        name: 'bugfree',
-        description: '【查看项目bug，关闭bug】',
-        address: 'http://192.168.100.23/bugfree/index.php?r=site/login'
-    },{
-        name: '中转文件位置',
-        description: '【 用于公司电脑之间，文件中转 】',
-        address: 'http://192.168.99.241-999中转文件夹'
-    }, {
-        name: 'testLink',
-        description: '【 测试用例  用户名 全拼小写 密码123456 】',
-        address: 'http://192.168.100.23/testlink/index.php?caller=login'
-    },{
-        name: 'eoa',
-        description: '【 考勤查询，请假签卡流程提交  】',
-        address: 'http://eoa.tenda.cn'
-    },{
-        name: 'agile',
-        description: '【 项目情况，填写工时 】',
-        address: 'http://plm.tenda.cn:7001/Agile/default/login-cms.jsp'
-    }, {
-        name: 'CI服务器路径',
-        description: '【 在线工具等 用户名 中文用户名  密码 全拼小写 】',
-        address: 'http://192.168.99.17'
-    }];
-
-var  toolTableData=[{
-    name: '翻译工具',
-    description: '【组内翻译工具】',
-    address: 'https://github.com/reasyTeam/b28-cli'
-}];
-
 export {
-    processData,detailData,codeLines,resourceTableData,toolTableData
+    processData,detailData,codeLines
 }

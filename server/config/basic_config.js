@@ -5,7 +5,7 @@ class BasicConfig {
     constructor() {
         this.httpConfig = {
             //监听端口
-            port: 80,
+            port: 8090,
             //部署的服务器IP地址  
             //测试环境下设置为local
             ip: global.debug.env == "dev" ? "localhost" : "192.168.99.123"

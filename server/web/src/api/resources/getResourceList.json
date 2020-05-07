@@ -1,0 +1,21 @@
+{
+    "status": "ok",
+    "list": [
+        {
+            "id": 1,
+            "name": "组内资料文档位置",
+            "description": "【各主线代码】",
+            "address": "http://192.168.100.233:18080/svn/GNEUI",
+            "createdAt": "2020-05-06T07:53:31.000Z",
+            "updatedAt": "2020-05-06T07:53:31.000Z"
+        },
+        {
+            "id": 2,
+            "name": "22组内资料文档位置dddd",
+            "description": "22【各主线代dddd码】",
+            "address": "22http://192.168.100.233:ddd18080/svn/GNEUI",
+            "createdAt": "2020-05-06T09:19:46.000Z",
+            "updatedAt": "2020-05-06T09:34:35.000Z"
+        }
+    ]
+}
