@@ -611,16 +611,16 @@ class OEM {
                 replacedValue; //当前匹配的标签
 
             //匹配tag标签中的内容
-            tagReg = new RegExp(curTag + "\r?\n?((.*\r?\n?)*?.*)\r?\n?\\s*" + curTag, "g");
+            tagReg = new RegExp(curTag + "[\\s\\S]*?" + curTag, "g");
             tagMatch = tagReg.exec(content);
 
             //遍历所有的匹配，将该文件内所有的匹配都替换掉
             while (!!tagMatch) {
                 try {
-                    typeof curRule.before == "function" && curRule.before(tagMatch[1], toReplaceValue);
-                    replacedValue = curRule.how(tagMatch[1], toReplaceValue);
-                    content = content.replace(tagMatch[1], replacedValue);
-                    typeof curRule.after == "function" && curRule.after(tagMatch[1], replacedValue);
+                    typeof curRule.before == "function" && curRule.before(tagMatch[0], toReplaceValue);
+                    replacedValue = curRule.how(tagMatch[0], toReplaceValue);
+                    content = content.replace(tagMatch[0], replacedValue);
+                    typeof curRule.after == "function" && curRule.after(tagMatch[0], replacedValue);
                 } catch (e) {
                     //在服务器输出错误，但不中断,但是需要将这些错误储存起来告知用户
                     errs.push(`替换${curRule.title} e.stack`);
