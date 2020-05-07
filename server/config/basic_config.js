@@ -33,7 +33,7 @@ class BasicConfig {
             //SVN用户名
             user: "Pengjuanli",
             //SVN密码
-            pass: "123321",
+            pass: "Peng_123321",
             //服务器上储存的根目录
             root: path.join(__dirname, "../../CI_storage"),
             //10s没收到回复则认为超时
